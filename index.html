@@ -1,0 +1,492 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>git-flow</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+    <link rel="stylesheet" href="lib/css/font-awesome.css">
+    <style>
+    .reveal section img.plain {
+      background: none;
+      border: 0;
+      box-shadow: none;
+    }
+    .reveal .fa {
+      font-family: 'FontAwesome';
+      font-style: normal;
+    }
+    .reveal p.meme {
+      font-family: Impact;
+      color: #fff;
+      -webkit-text-stroke: 4px #000;
+      text-transform: uppercase;
+      font-size: 2em;
+    }
+    </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+        <section data-background-color="#000000"></section>
+        
+        <section>
+          <section>
+            <h1>Centralized Workflow</h1>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git clone ssh://user@host/path/to/repo.git
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git status # View the state of the repo
+            $ git add &lt;some-file&gt; # Stage a file
+            $ git commit # Commit a file</some-file>
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git push origin master
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            error: failed to push some refs to '/path/to/repo.git'
+            hint: Updates were rejected because the tip of your current branch is behind
+            hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
+            hint: before pushing again.
+            hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+            </code></pre>
+
+            <aside class="notes">
+              <a href="https://www.atlassian.com/git/tutorials/comparing-workflows">Comparing Workflows</a>
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Feature Branch Workflow</h1>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git checkout -b marys-feature master
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git status
+            $ git add &lt;some-file&gt;
+            $ git commit
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git push -u origin marys-feature
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Forking Workflow</h1>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git clone https://user@bitbucket.org/user/repo.git
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git remote add upstream https://user@bitbucket.org/maintainer/repo.git
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h1>
+            <img data-src="images/git-flow.png" alt="git-flow" class="plain"><br>
+            Gitflow Workflow
+          </h1>
+
+          <aside class="notes">
+            Vincent Driessen
+          </aside>
+        </section>
+
+        <section>
+          <img data-src="images/04.svg" class="plain">
+
+          <aside class="notes">
+            <ul>
+              <li>feature branches</li>
+              <li>versioned releases</li>
+              <li>hotfixing production code</li>
+            </ul>
+          </aside>
+        </section>
+
+        <section>
+          <img data-src="images/homebrew-256x256.png" alt="Homebrew" class="plain">
+
+          <pre class="fragment"><code class="bash" data-trim data-noescape>
+          $ brew cask install sourcetree
+          </code></pre>
+
+          <pre class="fragment"><code class="bash" data-trim data-noescape>
+          $ brew install git-flow-avh hub
+          </code></pre>
+
+          <pre class="fragment"><code class="bash" data-trim data-noescape>
+          $ 'eval "$(hub alias -s)"' &gt;&gt; ~/.bashrc
+          $ 'eval "$(hub alias -s)"' &gt;&gt; ~/.zshrc
+          </code></pre>
+
+          <aside class="notes">
+            A VirtualHome
+          </aside>
+        </section>
+
+        <section>
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ mkdir foo
+            $ cd foo/
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git init
+            Initialized empty Git repository in /Users/mstrzele/GitHub/foo/.git/
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git commit --allow-empty -m 'Initial commit'
+            [master (root-commit) ea88016] Initial commit
+            </code></pre>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git create -p Letsdeal/foo
+            Updating origin
+            created repository: Letsdeal/foo
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git push -u origin master
+            Counting objects: 2, done.
+            Writing objects: 100% (2/2), 817 bytes | 0 bytes/s, done.
+            Total 2 (delta 0), reused 0 (delta 0)
+            To github.com:Letsdeal/foo.git
+             * [new branch]      master -&gt; master
+            Branch master set up to track remote branch master from origin.
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git fork
+            Updating mstrzele
+            From ssh://github.com/Letsdeal/foo
+             * [new branch]      master     -&gt; mstrzele/master
+            new remote: mstrzele
+            </code></pre>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git flow init -d
+            Using default branch names.
+
+            Which branch should be used for bringing forth production releases?
+               - master
+            Branch name for production releases: [master]
+            Branch name for "next release" development: [develop]
+
+            How to name your supporting branch prefixes?
+            Feature branches? [feature/]
+            Bugfix branches? [bugfix/]
+            Release branches? [release/]
+            Hotfix branches? [hotfix/]
+            Support branches? [support/]
+            Version tag prefix? []
+            Hooks and filters directory? [/Users/mstrzele/GitHub/foo/.git/hooks]
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git push -u origin develop
+            Total 0 (delta 0), reused 0 (delta 0)
+            To github.com:Letsdeal/foo.git
+             * [new branch]      develop -&gt; develop
+            Branch develop set up to track remote branch develop from origin.
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Feature Branches</h2>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git flow feature start foo
+            Switched to a new branch 'feature/foo'
+
+            Summary of actions:
+            - A new branch 'feature/foo' was created, based on 'develop'
+            - You are now on branch 'feature/foo'
+
+            Now, start committing on your feature. When done, use:
+
+                 git flow feature finish foo
+
+            </code></pre>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ echo 'foo' &gt; foo
+            $ git add foo
+            $ git commit -m 'foo'
+            [feature/foo fe268cc] foo
+             1 file changed, 1 insertion(+)
+             create mode 100644 foo
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git flow feature finish foo
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git flow feature publish foo
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git push -u mstrzele feature/foo
+            Counting objects: 3, done.
+            Writing objects: 100% (3/3), 894 bytes | 0 bytes/s, done.
+            Total 3 (delta 0), reused 0 (delta 0)
+            To github.com:mstrzele/foo.git
+             * [new branch]      feature/foo -&gt; feature/foo
+            Branch feature/foo set up to track remote branch feature/foo from mstrzele.
+            </code></pre>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git pull-request -m 'foo' -b Letsdeal:develop
+            https://github.com/Letsdeal/foo/pull/1
+            </code></pre>
+          </section>
+
+          <section>
+            <h3>GitHub</h3>
+
+            <img data-src="images/Screen Shot 2017-03-27 at 21.47.04.png" alt="Rebase and merge" class="plain">
+          </section>
+
+          <section>
+            <h3>gitflow-avh</h3>
+
+            <pre><code class="bash" data-trim data-noescape>
+            $ git flow feature finish foo
+            Switched to branch 'develop'
+            Your branch is up-to-date with 'origin/develop'.
+            Updating ea88016..fe268cc
+            Fast-forward
+             foo | 1 +
+             1 file changed, 1 insertion(+)
+             create mode 100644 foo
+            Deleted branch feature/foo (was fe268cc).
+
+            Summary of actions:
+            - The feature branch 'feature/foo' was merged into 'develop'
+            - Feature branch 'feature/foo' has been locally deleted
+            - You are now on branch 'develop'
+
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git push -u origin develop
+            Counting objects: 3, done.
+            Writing objects: 100% (3/3), 894 bytes | 0 bytes/s, done.
+            Total 3 (delta 0), reused 0 (delta 0)
+            To github.com:Letsdeal/foo.git
+               ea88016..fe268cc  develop -&gt; develop
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Versioned Releases</h2>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git flow release start v0.1.0
+            Switched to a new branch 'release/v0.1.0'
+
+            Summary of actions:
+            - A new branch 'release/v0.1.0' was created, based on 'develop'
+            - You are now on branch 'release/v0.1.0'
+
+            Follow-up actions:
+            - Bump the version number now!
+            - Start committing last-minute fixes in preparing your release
+            - When done, run:
+
+                 git flow release finish 'v0.1.0'
+
+            </code></pre>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git flow release publish v0.1.0
+            Total 0 (delta 0), reused 0 (delta 0)
+            To github.com:Letsdeal/foo.git
+             * [new branch]      release/v0.1.0 -&gt; release/v0.1.0
+            Branch release/v0.1.0 set up to track remote branch release/v0.1.0 from origin.
+            Already on 'release/v0.1.0'
+            Your branch is up-to-date with 'origin/release/v0.1.0'.
+
+            Summary of actions:
+            - The remote branch 'release/v0.1.0' was created or updated
+            - The local branch 'release/v0.1.0' was configured to track the remote branch
+            - You are now on branch 'release/v0.1.0'
+
+            </code></pre>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git flow release finish -m 'foo' -p v0.1.0
+            # ...
+
+            Summary of actions:
+            - Release branch 'release/v0.1.0' has been merged into 'master'
+            - The release was tagged 'v0.1.0'
+            - Release tag 'v0.1.0' has been back-merged into 'develop'
+            - Release branch 'release/v0.1.0' has been locally deleted; it has been remotely deleted from 'origin'
+            - 'develop', 'master' and tags have been pushed to 'origin'
+            - You are now on branch 'develop'
+
+            </code></pre>
+
+            <aside class="notes">
+              only one release
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Hotfixing Production Code</h2>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ git flow hotfix start v0.1.1
+            Switched to a new branch 'hotfix/v0.1.1'
+
+            Summary of actions:
+            - A new branch 'hotfix/v0.1.1' was created, based on 'master'
+            - You are now on branch 'hotfix/v0.1.1'
+
+            Follow-up actions:
+            - Start committing your hot fixes
+            - Bump the version number now!
+            - When done, run:
+
+                 git flow hotfix finish 'v0.1.1'
+
+            </code></pre>
+          </section>
+
+          <section>
+            <pre><code class="bash" data-trim data-noescape>
+            $ echo 'bar' &gt; bar
+            $ git add bar
+            $ git commit -m 'bar'
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            git flow hotfix publish v0.1.1
+            # ...
+
+            Summary of actions:
+            - The remote branch 'hotfix/v0.1.1' was created or updated
+            - The local branch 'hotfix/v0.1.1' was configured to track the remote branch
+            - You are now on branch 'hotfix/v0.1.1'
+
+            </code></pre>
+
+            <pre class="fragment"><code class="bash" data-trim data-noescape>
+            $ git flow hotfix finish -m 'bar' -p v0.1.1
+            # ...
+
+            Summary of actions:
+            - Hotfix branch 'hotfix/v0.1.1' has been merged into 'master'
+            - The hotfix was tagged 'v0.1.1'
+            - Hotfix tag 'v0.1.1' has been back-merged into 'develop'
+            - Hotfix branch 'hotfix/v0.1.1' has been locally deleted; it has been remotely deleted from 'origin'
+            - 'develop', 'master' and tags have been pushed to 'origin'
+            - You are now on branch 'develop'
+
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <img data-src="images/git-flow-commands.png" alt="Commands" class="plain">
+        </section>
+
+        <section>
+          <pre><code class="bash" data-trim data-noescape>
+          $ git flow bugfix start baz
+          </code></pre>
+
+          <pre class="fragment"><code class="bash" data-trim data-noescape>
+          $ git flow support start v0.1.0+baz v0.1.0
+          </code></pre>
+        </section>
+
+        <section>
+          <img data-src="images/687474703a2f2f692e696d6775722e636f6d2f543149374757582e706e67" alt="Paris Metro lines on a Git graph" class="plain">
+        </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
